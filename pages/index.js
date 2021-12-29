@@ -1,23 +1,57 @@
-import Head from 'next/head'
-import Header from '@components/Header'
-import Footer from '@components/Footer'
+import React, { useContext } from "react"
 
-export default function Home() {
+import { auth } from "../firebase/clientApp"
+import { signOut } from "firebase/auth"
+
+import AuthRoute from "../HOC/authRoute"
+
+import { AuthContext } from "../context/AuthContext"
+
+function Index() {
+  const { userData } = useContext(AuthContext)
+
+  const signOutHandler = async () => {
+    await signOut(auth)
+  }
+
   return (
-    <div className="container">
-      <Head>
-        <title>Next.js Starter!</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <Header title="Welcome to my app!" />
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-      </main>
-
-      <Footer />
-    </div>
+    <AuthRoute>
+      <div>
+        <h1>Home</h1>
+        <button onClick={signOutHandler}>
+          Sign out
+        </button>
+        <div>
+          <div>
+            <h4>Authentication method:</h4>
+            <h6>{userData.userProviderId}</h6>
+          </div>
+          <div>
+            <h4>userId:</h4>
+            <h6>{userData.userId}</h6>
+          </div>
+          <div>
+            <h4>display name:</h4>
+            <h6>{userData.userName ? userData.userName : "null"}</h6>
+          </div>
+          <div>
+            <h4>email:</h4>
+            <h6>{userData.userEmail}</h6>
+          </div>
+          <div>
+            <h4>Profile picture</h4>
+            {userData.userPhotoLink ? (
+              <img src={userData.userPhotoLink}
+                alt={userData.userName}
+              />
+            ) : (
+              "null"
+            )}
+          </div>
+        </div>
+      </div>
+    </AuthRoute>
   )
 }
+
+export default Index
