@@ -3,12 +3,12 @@ import { getAuth } from "firebase/auth"
 import { getFirestore } from "@firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAbz5yuhJelJmIIdlS5-3hnt15tFN2ETSY",
-  authDomain: "next-firebase-90774.firebaseapp.com",
-  projectId: "next-firebase-90774",
-  storageBucket: "next-firebase-90774.appspot.com",
-  messagingSenderId: "909423628545",
-  appId: "1:909423628545:web:203497461178b833e48b00"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 
 let firebaseApp
